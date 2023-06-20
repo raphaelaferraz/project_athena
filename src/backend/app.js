@@ -29,10 +29,10 @@ const DBPATH = "./backend/data/db_projeto.db";
 app.set("view engine", "ejs");
 
 // Define o diretório 'views' como o diretório raiz das páginas HTML​
-app.set("views", "./Frontend/");
+app.set("views", "./frontend/");
 
 // Define o diretório 'frontend' como o diretório raiz do servidor web
-app.use(express.static("./Frontend/"));
+app.use(express.static("./frontend/"));
 
 // Define o express para receber dados em formato JSON
 app.use(express.json());
