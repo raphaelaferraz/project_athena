@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/css/estilo.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">   
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Pan Pedia</title>
+</head>
+<body>
+    <!-- Cabeçalho -->
+  <header class="cabecalho">
+    <nav class="cabecalho__navegacao">
+      <input type="checkbox" class="cabecalho__navegacao__input" id="input-menu">
+      <div class="cabecalho__navegacao__div-icone" id="div-menu">
+        <span class="cabecalho__navegacao__span"></span>
+        <span class="cabecalho__navegacao__span"></span>
+        <span class="cabecalho__navegacao__span"></span>
+      </div>
+      <ul class="cabecalho__navegacao__lista">
+        <li class="cabecalho__navegacao__lista__item">
+          <a href="/" class="cabecalho__navegacao__lista__item__link">Home</a>
+        </li>
+        <li class="cabecalho__navegacao__lista__item">
+          <a href="" id="botao-noturno" class="cabecalho__navegacao__lista__item__link">Modo Noturno</a>
+        </li>
+        <li class="cabecalho__navegacao__lista__item">
+          <a href="/tabelasFavoritadas" class="cabecalho__navegacao__lista__item__link">Favoritos</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Link para voltar para a tela inicial -->
+  <a class="div-voltar" href="/">
+    <img src="../assets/img/voltar.svg" alt="Botão voltar" class="cabecalho__div-voltar__imagem" id="voltar">
+  </a>
+
+  <!-- Conteúdo principal -->
+  <main class="principal-tabelas">
+
+    <!-- Seção que evidencia o input de pesquisa -->
+    <section id="secao-input" class="secao-pesquisa">
+      <h1 class="secao-pesquisa__titulo"><span class="secao-pesquisa__titulo__span">PAN</span>PEDIA</h1>
+      <div class="secao-pesquisa__div-pesquisa">
+        <div style="display: flex; flex-direction: row; margin-bottom: -2px;">
+          <input id="input-pesquisa" type="text" placeholder="Digite sua pesquisa" class="secao-pesquisa__div-pesquisa__input" data-input-pesquisa>
+
+          <!-- Botão para filtros -->
+          <button title="Clique para acessar os filtros" id="btn-filtro" class="secao-pesquisa__div-pesquisa__botao botao-filtro btn-filtro"> 
+            <img id="Vazio" src="../assets/img/filtro.svg" alt="Ícone de filtro" class="secao-pesquisa__div-pesquisa__botao__imagem">
+            <img id="Preenchido" src="../assets/img/filtroPreenchido.svg" style="display: none" alt="Ícone de filtro" class="secao-pesquisa__div-pesquisa__botao__imagem">
+          </button>
+
+          <!-- Botão para favoritos -->
+          <a title="Clique para acessar tabelas favoritadas" id="btn-favoritos" class="secao-pesquisa__div-pesquisa__botao botao-favorito" href="/tabelasFavoritadas">
+            <img id="FavoritoVazio" src="../assets/img/favorito.svg" alt="Ícone de favoritos" class="secao-pesquisa__div-pesquisa__botao__imagem" height="30px" width="30px">
+            <img id="FavoritoPreenchido" src="../assets/img/favoritoPreenchido.svg" alt="Ícone de favoritos" class="secao-pesquisa__div-pesquisa__botao__imagem" height="30px" width="30px">
+          </a>
+        </div>
+
+        <!-- Div que apresenta os filtros -->
+        <div class="secao-pesquisa__div-filtro">
+        </div>
+      </div>
+      
+      <!-- Div que exibe a quantidade de resultados da pesquisa -->
+      <div class="secao-quantidade-resultados">
+        <p class="resultados" id="texto-quantidade"><span id="quantidade" class="resultados" resultados> </span></p>
+        <hr class="barra" id="barra">
+      </div>
+
+      <!-- Seção de tabelas que apresenta todas as tabelas correspondentes à pesquisa -->
+      <section class="secao-tabelas">
+
+        <!-- Lista que contém cada card da tabela -->
+        <ul class="secao-tabelas__lista" data-container>
+          <template data-template>
+            <li class="secao-tabelas__lista__item">
+              <div class="secao-tabelas__lista__item__div-titulo">
+                <h2 class="secao-tabelas__lista__item__div-titulo__titulo" data-nome></h2>
+                <div id="div-verificacao" data-icone-verificacao>
+                  <input type="hidden" class="secao-tabelas_lista_item_div-informacoes_div-icones__input-verificacao" value="" data-verificacao>
+                  <img src="../assets/img/verificacao.svg">
+                </div>
+              </div>
+              <div class="secao-tabelas__lista__item__div-informacoes">
+                <div class="secao-tabelas__lista__item__div-informacoes__div-detalhes">
+                  <p class="secao-tabelas__lista__item__div-informacoes__div-detalhes__paragrafo-assunto" data-assunto></p>
+                  <p class="secao-tabelas__lista__item__div-informacoes__div-detalhes__paragrafo-origem" data-origem></p>
+                </div>
+                <div class="secao-tabelas__lista__item__div-informacoes__div-icones">
+                  <div id="div-sensivel" class="secao-tabelas_lista_item_div-informacoes_div-icones__botao-sensivel" data-icone-sensivel>
+                    <input type="hidden" class="secao-tabelas_lista_item_div-informacoes_div-icones__input-sensivel" value="" data-sensivel>
+                    <img src="../assets/img/critico.svg" class="icon">
+                  </div>
+                  <a class="secao-tabelas__lista__item__div-informacoes__div-icones__botao-favorito">
+                    <input type="hidden" readonly id="id_tabela" value="" data-id-tabela-favorito>
+                    <img src="../assets/img/favorito.svg" height="30px" width="30px" data-imagem-favorito>
+                  </a>
+                </div>
+              </div>
+              <div class="secao-tabelas__lista__item__div-paragrafo">
+                <p class="secao-tabelas__lista__item__paragrafo" data-desc></p>
+                <input type="hidden" readonly id="id_tabela" value="" data-id-tabela>
+                <input type="hidden" readonly id="id_bd" value="" data-id-bd>
+              </div>
+            </li>
+          </template>
+        </ul>
+      </section>
+
+      <!-- Div que demonstra a paginação -->
+      <div class="paginacao" id="paginacao">
+        <a href="#" class="paginacao-link ">1</a>
+        <a href="#" class="paginacao-link ">2</a>
+        <a href="#" class="paginacao-link ">3</a>
+        <a href="#" class="paginacao-link ">4</a>
+        <a href="#" class="paginacao-link ">5</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Div que tem o dropdown responsável pelo controle da quantidade de elementos na tela -->
+  <div class="dropdown" id="dropdown" dropdown>
+    <button class="dropdown__botao">Itens por página</button>
+    <div class="dropdown-conteudo">
+      <a href="#" onclick="quantidadeMaxima(5)">5</a>
+      <a href="#" onclick="quantidadeMaxima(10)">10</a>
+      <a href="#" onclick="quantidadeMaxima(15)">15</a>
+      <a href="#" onclick="quantidadeMaxima(20)">20</a>
+    </div>
+  </div>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <img src="../assets/img/logoBancoPan.svg" alt="Logo do Banco PAN" class="rodape__imagem-logo-pan" id="pan-logo">
+    <p class="rodape__paragrafo">&copy; Copyright 2023 - Desenvolvido por <a href="" class="rodape__paragrafo__link">Agilify</a></p>
+    <img src="../assets/img/logoProjeto.svg" alt="Logo do grupo dos alunos do Inteli, o Project Athena" class="rodape__imagem-logo-grupo" id="athena-logo">
+  </footer>
+
+<!-- Scripts -->
+  <script type="text/javascript" src="../assets/js/pesquisaTabelas.js"></script>
+  <script src="../assets/js/animacaoCabecalho.js"></script>
+  <script src="../assets/js/manipulaItens.js" defer></script>
+  <script src="../assets/js/mapeiaCategorias.js"></script>
+  <script src="../assets/js/modoNoturno.js"></script>
+</body>
+</html>

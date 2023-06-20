@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tabela</title>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/estilo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Ubuntu&display=swap" rel="stylesheet"/>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+<body>
+  <!-- Cabeçalho -->
+  <header class="cabecalho">
+    <nav class="cabecalho__navegacao">
+      <input type="checkbox" class="cabecalho__navegacao__input" id="input-menu">
+      <div class="cabecalho__navegacao__div-icone" id="div-menu">
+        <span class="cabecalho__navegacao__span"></span>
+        <span class="cabecalho__navegacao__span"></span>
+        <span class="cabecalho__navegacao__span"></span>
+      </div>
+      <ul class="cabecalho__navegacao__lista">
+        <li class="cabecalho__navegacao__lista__item">
+          <a href="/" class="cabecalho__navegacao__lista__item__link">Home</a>
+        </li>
+        <li class="cabecalho__navegacao__lista__item">
+          <a href="" id="botao-noturno" class="cabecalho__navegacao__lista__item__link">Modo Noturno</a>
+        </li>
+        <li class="cabecalho__navegacao__lista__item">
+          <a href="/tabelasFavoritadas" class="cabecalho__navegacao__lista__item__link">Favoritos</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Conteúdo principal -->
+  <main class="principal-detalhes-tabelas" id="main">
+    <!-- Link para voltar para a tela inicial -->
+    <a class="div-voltar" href="/">
+      <img src="../assets/img/voltar.svg" alt="Botão voltar" class="cabecalho__div-voltar__imagem" id="voltar">
+    </a>
+
+    <!-- Seção que evidencia o nome da tabela -->
+    <section class="secao">
+      <h1 class="secao__titulo" data-nome-tabela></h1>
+    </section>
+
+    <!-- Div que é responsável pelo sistema de tabs -->
+    <div class="secao__div-tabs">
+
+      <!-- Input para a tela de visão geral -->
+      <input type="radio" name="tabs" class="secao-botoes__input" id="visao-geral" checked/>
+      <label for="visao-geral" class="secao-botoes__label">Visão Geral</label>
+      <!-- Conteúdo de visão geral -->
+      <section class="secao-conteudo">
+        <section class="secao-conteudo__secao-descricao">
+          <h2 class="secao-conteudo__secao-descricao__titulo">
+            Descrição Tabela
+          </h2>
+          <div class="secao-conteudo__secao-descricao__div">
+            <p class="secao-conteudo__secao-descricao__div__paragrafo" data-descricao-tabela></p>
+            <div id="div-sensivel" class="secao-tabelas_lista_item_div-informacoes_div-icones__botao-sensivel" data-icone-sensivel>
+              <p class="secao-conteudo__secao-descricao__div__paragrafo-dados-sensiveis"> Contém contéudo sensível
+                <img src="../assets/img/critico.svg" alt="" class="secao-conteudo__secao-descricao__div__paragrafo__imagem"/>
+                <input type="hidden" class="secao-tabelas_lista_item_div-informacoes_div-icones__input-sensivel" value="" data-sensivel>
+            </div>
+          </div>
+        </section>
+        <section class="secao-conteudo__secao-descricao">
+          <h2 class="secao-conteudo__secao-descricao__titulo">
+            Responsável pela Tabela
+          </h2>
+          <div class="secao-conteudo__secao-descricao__div">
+
+            <div class="secao-conteudo__secao-responsavel__div-input">
+              <label for="conjunto-dados" class="secao-conteudo__secao-responsavel__div__label">Conjunto de Dados:</label>
+              <input type="text" name="conjunto-dados" class="secao-conteudo__secao-responsavel__div__label__input" placeholder="Conteúdo" readonly data-conjunto-dados-tabela/>
+            </div>
+            <div class="secao-conteudo__secao-responsavel__div-input">
+              <label for="owner" class="secao-conteudo__secao-responsavel__div__label">Owner:</label>
+              <input type="text" name="owner" class="secao-conteudo__secao-responsavel__div__label__input" placeholder="Conteúdo" readonly data-owner-tabela/>
+            </div>
+            <div class="secao-conteudo__secao-responsavel__div-input">
+              <label for="steward" class="secao-conteudo__secao-responsavel__div__label">Steward:</label>
+              <input type="text" name="steward" class="secao-conteudo__secao-responsavel__div__label__input" placeholder="Conteúdo" readonly data-steward-tabela/>
+            </div>
+          </div>
+        </section>
+        <section class="secao-conteudo__secao-detalhes">
+          <h2 class="secao-conteudo__secao-detalhes__titulo">
+            Detalhes da Tabela
+          </h2>
+          <div class="secao-conteudo__secao-detalhes__div">
+            <div class="secao-conteudo__secao-detalhes__div-editar div-editar">
+              <button class="secao-conteudo__secao-descricao__div__botao-editar" onclick="editar()">
+                Editar Dados
+              </button>
+              <form method="post" action="/solicitar" class="pop-up" id="editar-pop-up">
+                <button type="button" id="fechar-pop-up" class="fechar-pop-up"><img src="../assets/img/fecharEdicao.svg" alt="Ícone para fechar pop-up"></button>
+                <div class="pop-up__content">
+                  <label for="titulo" class="pop-up__label__titulo">Nome da Tabela:</label>
+                  <input type="text" id="titulo" class="pop-up__input" placeholder="Título">
+          
+                  <label for="descricao" class="pop-up__label">Descrição Tabela:</label>
+                  <input type="text" id="descricao" class="pop-up__input" placeholder="Conteúdo">
+          
+                  <label for="conjunto-dados" class="pop-up__label">Conjunto de Dados:</label>
+                  <input type="text" id="conjunto-dados" class="pop-up__input">
+            
+                  <label for="owner" class="pop-up__label">Owner:</label>
+                  <input type="text" id="owner" class="pop-up__input" class="pop-up__input__owner">
+            
+                  <label for="steward" class="pop-up__label">Steward:</label>
+                  <input type="text" id="steward" class="pop-up__input">
+          
+                  <label for="ativo" class="pop-up__label">Ativo:</label>
+                  <input type="text" id="ativo" class="pop-up__input">
+          
+                  <label for="tipo-ativo" class="pop-up__label">Tipo de Ativo:</label>
+                  <input type="text" id="tipo-ativo" class="pop-up__input">
+          
+                  <label for="database" class="pop-up__label">Database:</label>
+                  <input type="text" id="database" class="pop-up__input">
+          
+                  <label for="caminho-tabela" class="pop-up__label">Caminho Tabela:</label>
+                  <input type="text" id="caminho-tabela" class="pop-up__input">
+          
+                  <label for="ultima-atualizacao" class="pop-up__label">Última Atualização:</label>
+                  <input type="text" id="ultima-atualizacao" class="pop-up__input">
+          
+                  <label for="data-criacao" class="pop-up__label">Data de Criação:</label>
+                  <input type="text" id="data-criacao" class="pop-up__input">
+          
+                  <label for="defasagem" class="pop-up__label">Defasagem:</label>
+                  <input type="text" id="defasagem" class="pop-up__input">
+          
+                  <label for="frequencia-atualizacao" class="pop-up__label">Frequência de Atualização:</label>
+                  <input type="text" id="frequencia-atualizacao" class="pop-up__input">
+          
+                  <label for="engenheiro-ingestao" class="pop-up__label">Engenheiro Responsável Pela ingestão:</label>
+                  <input type="text" id="engenheiro-ingestao" class="pop-up__input">
+            
+                  <button id="enviar-solicitacao" type="submit" class="pop-up__button" onclick="enviarSolicitacao()">Solicitar Edição</button>                                    <input type="hidden" name="id_usuario" value="1"> 
+                  <input type="hidden" id="sql_code" name="sql_code">
+
+                </div>
+              </form>
+
+            </div>
+            <div class="secao-conteudo__secao-detalhes__div-input">
+              <label for="ativo" class="secao-conteudo__secao-detalhes__div__label">Ativo:</label>
+                <input type="text" name="ativo" class="secao-conteudo__secao-detalhes__div__input" placeholder="Conteúdo" readonly/>
+            </div>
+            <div class="secao-conteudo__secao-detalhes__div-input">
+              <label for="tipo-ativo" class="secao-conteudo__secao-detalhes__div__label">Tipo do ativo:</label>
+              <input type="text" name="tipo-ativo" class="secao-conteudo__secao-detalhes__div__input" placeholder="Conteúdo" readonly/>
+            </div>
+            <div class="secao-conteudo__secao-detalhes__div-input">
+              <label for="database" class="secao-conteudo__secao-detalhes__div__label">Database:</label>
+              <input type="text" name="database" class="secao-conteudo__secao-detalhes__div__input" placeholder="Conteúdo" readonly data-database-tabela/>
+            </div>
+            <div class="secao-conteudo__secao-detalhes__div-input">
+              <label for="caminho" class="secao-conteudo__secao-detalhes__div__label">Caminho da Tabela:</label>
+              <input type="text" name="caminho" class="secao-conteudo__secao-detalhes__div__input" placeholder="Conteúdo" readonly data-caminho-tabela/>
+            </div>
+            <div class="secao-conteudo__secao-detalhes__div-input">
+              <label for="ultima-atualizacao" class="secao-conteudo__secao-detalhes__div__label">Última atualização:</label>
+              <input type="text" name="ultima-atualizacao" class="secao-conteudo__secao-detalhes__div__input" placeholder="Conteúdo" readonly/>
+            </div>
+          </div>
+        </section>
+            <section class="secao-conteudo__secao-detalhes">
+              <h2 class="secao-conteudo__secao-detalhes__titulo">
+                Disponibilidade e Atualização
+              </h2>
+              <div class="secao-conteudo__secao-detalhes__div">
+                <div class="secao-conteudo__secao-tecnico__div-atualizacao__div-input">
+                  <label for="data-criacao" class="secao-conteudo__secao-tecnico__div-atualizacao__label">Data de criação:</label>
+                  <input type="text" name="data-criacao" class="secao-conteudo__secao-tecnico__div-atualizacao__input" placeholder="16/05/2023" readonly/>
+                </div>
+                <div class="secao-conteudo__secao-tecnico__div-atualizacao__div-input">
+                  <label for="defasagem" class="secao-conteudo__secao-tecnico__div-atualizacao__label">Defasagem:</label>
+                  <input type="text" name="defasagem" class="secao-conteudo__secao-tecnico__div-atualizacao__input" placeholder="D-1" readonly data-defasagem-tabela/>
+                </div>
+                <div class="secao-conteudo__secao-tecnico__div-atualizacao__div-input">
+                  <label for="frequencia-atualizacao" class="secao-conteudo__secao-tecnico__div-atualizacao__label">Frequência de Atualização:</label>
+                  <input type="text" name="frequencia-atualizacao" class="secao-conteudo__secao-tecnico__div-atualizacao__input" placeholder="1 mês" readonly/>
+                </div>
+                <div class="secao-conteudo__secao-tecnico__div-input">
+                  <label for="engenheiro-ingestao" class="secao-conteudo__secao-tecnico__div__label">Engenheiro responsável pela ingestão:</label>
+                  <input type="text" name="conjunto-dados" class="secao-conteudo__secao-tecnico__div__label__input" placeholder="Engenheiro" readonly data-engenheiro-sustentacao-tabela/>
+                </div>
+              </div>
+            </section>
+      </section>
+
+      <!-- Input para a tela de campos -->
+      <input type="radio" name="tabs" class="secao-botoes__input" id="campos"/>
+      <label for="campos" class="secao-botoes__label" id="campos-label">Campos</label>
+      <!-- Conteúdo de campos -->
+      <section class="secao-conteudo">
+        <section class="secao-conteudo-campos">
+          <div class="secao-conteudo__div">
+            <h2 class="secao-conteudo__subtitulo">Informações de campos da tabela</h2>
+              <div class="secao-conteudo__div-pesquisa">
+                <select name="tipo-campo" id="tipo-campo" class="secao-conteudo__div-pesquisa__select">
+                  <option value="tipo-campo" class="secao-conteudo__div-pesquisa__select__opcao">Tipo Campo</option>
+                  <option value="string" class="secao-conteudo__div-pesquisa__select__opcao">string</option>
+                  <option value="boolean" class="secao-conteudo__div-pesquisa__select__opcao">boolean</option>
+                  <option value="integer" class="secao-conteudo__div-pesquisa__select__opcao">integer</option>
+                </select>
+                <input type="search" name="pesquisa-campo" id="pesquisa-campo" placeholder="Digite o campo desejado" class="secao-conteudo__div-pesquisa__input" data-input-pesquisa>
+              </div>
+          </div>
+        
+          <section class="secao-conteudo__secao-campos">
+            <ul class="secao-conteudo__secao-campos__lista" data-container>
+              <template data-template>
+                <li class="secao-conteudo__secao-campos__lista__item card"> 
+                  <div class="secao-conteudo__secao-campos__lista__item__div-texto">
+                    <div class="secao-conteudo__secao-campos__lista__item__div-tipo">
+                      <p class="secao-conteudo__secao__campos__lista__item__div-tipo__paragrafo" data-tipo>
+                        String
+                      </p>
+                    </div>
+                    <h3 class="secao-conteudo__secao-campos__lista__item__div-texto__titulo" data-nome>
+                      Título do Campo
+                    </h3>
+                    <p class="secao-conteudo__secao-campos__lista__item__div-texto__paragrafo" data-desc>
+                      Texto com metadado descritivo da tabela indicando quais as funções que ela exerce dentro da empresa
+                    </p>
+                  </div>
+                </li>
+              </template>
+            </ul>
+          </section>
+        </section>
+      </section>
+
+      <!-- Input para a tela de feedback -->
+      <input type="radio" name="tabs" class="secao-botoes__input" id="feedback"/>
+      <label for="feedback" class="secao-botoes__label">Feedback</label>
+      <!-- Conteúdo de feedback -->
+      <section class="secao-conteudo">
+        <section class="secao-conteudo-feedback">
+          <form method="post" action="/inserirfeedback">
+            <div class="secao-feedback__div">
+              <h2 class="secao-feedback__subtitulo">Como você avalia essa tabela?</h2>
+            
+              <div class="secao-feedback__estrela">
+                <input type="radio" id="estrela5" name="estrela" value="5" onclick="guarda(5)">
+                <label for="estrela5"></label>
+                <input type="radio" id="estrela4" name="estrela" value="4" onclick="guarda(4)">
+                <label for="estrela4"></label>
+                <input type="radio" id="estrela3" name="estrela" value="3" onclick="guarda(3)">
+                <label for="estrela3"></label>
+                <input type="radio" id="estrela2" name="estrela" value="2" onclick="guarda(2)">
+                <label for="estrela2"></label>
+                <input type="radio" id="estrela1" name="estrela" value="1" onclick="guarda(1)">
+                <label for="estrela1"></label>
+                <input type="hidden" name="avaliacao" value="" id="estrela">
+                <input type="hidden" name="id_tabela" value="" id="id_tabela">
+              </div>
+            </div>
+            <div class="secao-feedback__comentario">
+              <div class="secao-feedback__comentario__div-label">
+                <label for="comente" class="secao-feedback__label">Comente:</label>
+                <div class="secao-feedback__icone" title="Comente sua opinião sobre a tabela, assim como o que podemos mudar ou melhorar e o que estamos fazendo bem!"></div>
+                  <span class="tooltip" id="tooltip">Mensagem exemplo</span>
+              </div>
+              <textarea type="text" name="comentario" id="comente" class="secao-feedback__input" required></textarea>
+              <div class="secao-feedback__div-botao">
+                <button class="secao-feedback__botao">Enviar Feedback</button>
+              </div>
+            </div>
+            </form>
+        </section>
+      </section>
+
+      <!-- Botão que é responsável pela solicitação de acesso à tabela -->
+      <input type="button" name="tabs" class="secao-botoes__input-acesso" value="Solicitar Acesso" id="acesso"/>
+    </div>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="rodape">
+    <img src="../assets/img/logoBancoPan.svg" alt="Logo do Banco PAN" class="rodape__imagem-logo-pan" id="pan-logo">
+    <p class="rodape__paragrafo">&copy; Copyright 2023 - Desenvolvido por <a href="" class="rodape__paragrafo__link">Agilify</a></p>
+    <img src="../assets/img/logoProjeto.svg" alt="Logo do grupo dos alunos do Inteli, o Project Athena" class="rodape__imagem-logo-grupo" id="athena-logo">
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../assets/js/manipulaItens.js"></script>
+  <script src="../assets/js/animacaoCabecalho.js"></script>
+  <script src="../assets/js/preencheInformacoes.js" defer></script>
+  <script src="../assets/js/pesquisaCampos.js"></script>
+  <script src="../assets/js/editarInformacao.js"></script>
+  <script src="../assets/js/modoNoturno.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favoritos</title>
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <link rel="stylesheet" href="../assets/css/estilo.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&family=Ubuntu&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+  <body>
+    <!-- Cabeçalho -->
+    <header class="cabecalho" id="cabecaFav">
+      <nav class="cabecalho__navegacao">
+        <input type="checkbox" class="cabecalho__navegacao__input" id="input-menu">
+        <div class="cabecalho__navegacao__div-icone" id="div-menu">
+          <span class="cabecalho__navegacao__span"></span>
+          <span class="cabecalho__navegacao__span"></span>
+          <span class="cabecalho__navegacao__span"></span>
+        </div>
+        <ul class="cabecalho__navegacao__lista">
+          <li class="cabecalho__navegacao__lista__item">
+            <a href="/" class="cabecalho__navegacao__lista__item__link">Home</a>
+          </li>
+          <li class="cabecalho__navegacao__lista__item">
+            <a href="" id="botao-noturno" class="cabecalho__navegacao__lista__item__link">Modo Noturno</a>
+          </li>
+          <li class="cabecalho__navegacao__lista__item">
+            <a href="/tabelasFavoritadas" class="cabecalho__navegacao__lista__item__link">Favoritos</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- Link para voltar para a tela inicial -->
+    <a class="div-voltar" href="/">
+      <img src="../assets/img/voltar.svg" alt="Botão voltar" class="cabecalho__div-voltar__imagem-favoritos" id="voltar"/>
+    </a>
+
+    <!-- Conteúdo principal -->
+    <main class="favoritos-tela">
+      <section id="secao-input" class="secao-pesquisa-favoritos">
+
+        <!-- Título da página -->
+        <h1 class="secao-pesquisa__titulo titulo-favoritos">FAVORITOS</h1>
+        <!-- Seção que evidencia o input de pesquisa -->
+        <section class="secao-pesquisa__div-pesquisa">
+          <div style="display: flex; flex-direction: row; margin-bottom: -2px;">
+            <input id="input-pesquisa" type="text" placeholder="Digite sua pesquisa" class="secao-pesquisa__div-pesquisa__input" data-input-pesquisa>
+
+            <!-- Botão para filtros -->
+            <button id="btn-filtro" class="secao-pesquisa__div-pesquisa__botao botao-filtro btn-filtro"> 
+              <img id="Vazio" src="../assets/img/filtro.svg" alt="Ícone de filtro" class="secao-pesquisa__div-pesquisa__botao__imagem">
+              <img id="Preenchido" src="../assets/img/filtroPreenchido.svg" style="display: none" alt="Ícone de filtro" class="secao-pesquisa__div-pesquisa__botao__imagem">
+            </button>
+
+            <!-- Botão para favoritos -->
+            <a id="btn-favoritos" class="secao-pesquisa__div-pesquisa__botao botao-favorito" href="/tabelasFavoritadas">
+              <img src="../assets/img/favoritoPreenchido.svg" alt="Ícone de favoritos" class="secao-pesquisa__div-pesquisa__botao__imagem" height="30px" width="30px">
+            </a>
+          </div>
+
+          <!-- Seção que evidencia o filtro -->
+          <div class="secao-pesquisa__div-filtro">
+          </div>
+        </section>
+      </section>
+
+      <!-- Seção que exibe as tabelas favoritadas -->
+      <section class="secao-tabelas">
+
+        <!-- Lista de tabelas favoritadas -->
+        <ul class="secao-tabelas__lista-favoritos" data-container>
+            <template data-template>
+            <li class="secao-tabelas__lista__item">
+            <input type="hidden" readonly value="" data-id-tabela-favoritada/>
+            <div class="secao-tabelas__lista__item__div-titulo">
+              <h2 class="secao-tabelas__lista__item__div-titulo__titulo" data-nome></h2>
+            </div>
+            <div class="secao-tabelas__lista__item__div-informacoes-favoritos">
+              <div class="secao-tabelas__lista__item__div-informacoes__div-detalhes">
+                <p class="secao-tabelas__lista__item__div-informacoes__div-detalhes__paragrafo-assunto" data-categoria></p>
+                <p class="secao-tabelas__lista__item__div-informacoes__div-detalhes__paragrafo-origem" data-origem></p>
+              </div>
+              <div class="secao-tabelas__lista__item__div-informacoes__div-icones">
+                <div class="secao-tabelas__lista__item__div-informacoes__div-icones__botao-sensivel" data-icone-sensivel style="display: block;">
+                  <input type="hidden" class="secao-tabelas__lista__item__div-informacoes__div-icones__input-sensivel" value="" data-sensivel>
+                  <img src="../assets/img/critico.svg" class="icon">
+                </div>
+                <div class="secao-tabelas__lista__item__div-informacoes__div-icones__botao-sensivel" data-icone-sensivel style="display: none;">
+                  <input type="hidden" class="secao-tabelas__lista__item__div-informacoes__div-icones__input-sensivel" value="" data-sensivel>
+                  <img src="../assets/img/critico.svg" class="icon">
+                </div>
+                <button   class="secao-tabelas__lista__item__div-informacoes__div-icones__botao-favorito"></button>
+                  <img src="../assets/img/favoritoPreenchido.svg" data-imagem-favorito height="30px" width="30px"/>
+                </button>
+                <div class="secao-tabelas__lista__item__div-informacoes__div-icones__lixeira" data-icone-lixeira>
+                  <input type="hidden" class="secao-tabelas__lista__item__div-informacoes__div-icones__lixeira" value="" data-lixeira>
+                  <img src="../assets/img/lixeira.svg" class="icon" id="icone-da-lixeira" height="25px" width="25px">
+                </div>
+              </div>
+            </div>
+            <div class="secao-tabelas__lista__item__paragrafo-div">
+              <p class="secao-tabelas__lista__item__paragrafo" data-descricao></p>
+              <input type="hidden" readonly id="id_tabela" value="" data-id-tabela/>
+            </div>
+            </li>
+            </template>
+        </ul>
+      </section>
+    </main>
+
+    <!-- Rodapé -->
+    <footer class="rodape rodape-favoritos">
+      <img src="../assets/img/logoBancoPan.svg" alt="Logo do Banco PAN" class="rodape__imagem-logo-pan" id="pan-logo"/>
+      <p class="rodape__paragrafo"> &copy; Copyright 2023 - Desenvolvido por
+        <a href="" class="rodape__paragrafo__link">Agilify</a>
+      </p>
+      <img src="../assets/img/logoProjeto.svg" alt="Logo do grupo dos alunos do Inteli, o Project Athena" class="rodape__imagem-logo-grupo" id="athena-logo"/>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/js/dadoSensivel.js"></script>
+    <script src="../assets/js/animacaoCabecalho.js"></script>
+    <script src="../assets/js/pesquisaFavoritos.js"></script>
+    <script src="../assets/js/manipulaItens.js" defer></script>
+    <script src="../assets/js/mapeiaCategorias.js"></script>
+    <script src="../assets/js/modoNoturno.js"></script>
+  </body>
+</html>
