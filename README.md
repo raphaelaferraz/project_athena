@@ -1,7 +1,7 @@
 # Inteli - Instituto de Tecnologia e Liderança 
 
 <p align="center">
-<a href= "https://www.inteli.edu.br/"><img src="https://www.inteli.edu.br/wp-content/uploads/2021/08/20172028/marca_1-2.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
+<a href= "https://www.inteli.edu.br/"><img src="./imagens/inteli.png" alt="Inteli - Instituto de Tecnologia e Liderança" border="0"></a>
 </p>
 
 # Project Athena
@@ -33,8 +33,8 @@
 </a>
 
 ## 🧑‍🏫 Professores:
-### Orientador(a) 
-- <a href="https://www.linkedin.com/in/victorbarq/">Nome do integrante 1</a>
+### Orientador 
+- <a href="https://www.linkedin.com/in/profclaudioandre/">Cláudio Fernando André</a>
 ### Instrutores
 - <a href="https://www.linkedin.com/in/fatima-toledo/">Fátima Toledo</a>
 - <a href="https://www.linkedin.com/in/flaviomarquesazevedo/">Flávio Azevedo</a> 
@@ -114,10 +114,13 @@ npm start
 
 ## 📋 Licença/License
 
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc :attributionURL" href="https://github.com/2023M2T9-Inteli/projeto3">Projeto Athena</a> por <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href=" https://github.com/2023M2T9-Inteli/projeto3">INTELI, Ana Luisa Goes Barbosa, Guilherme Ferreira Linhares, Pedro Henrique Oliveira Lima, , Paulo Octavio De Paula, Pedro Morita Bannwart, Raphaela Guiland Ferraz, Thiago Goulart de Oliveira, Tommy Ken Ishimatsu goto</a> está licenciado sob o estilo <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" ="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc. svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/ icons/by.svg?ref=chooser-v1"></a></p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc :attributionURL" href="https://github.com/2023M2T9-Inteli/projeto3">Projeto Athena</a> por <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/2023M2T9-Inteli/projeto3">INTELI, Ana Luisa Goes Barbosa, Guilherme Ferreira Linhares, Pedro Henrique Oliveira Lima, Paulo Octavio De Paula, Pedro Morita Bannwart, Raphaela Guiland Ferraz, Thiago Goulart de Oliveira, Tommy Ken Ishimatsu goto</a> está licenciado sob o estilo <a href="http://creativecommons.org/licenses/by/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" ="display:inline-block;">Attribution 4.0 International<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"></a></p>
 
 ## 🎓 Referências
 
 Aqui estão as referências usadas no projeto:
 
-1. <https://creativecommons.org/share-your-work/>
+1. <https://pt.wikipedia.org/w/index.php?title=Banco_PAN&oldid=65720861>
+2. <https://conteudos.xpi.com.br/renda-fixa/relatorios/banco-pan/>
+3. <https://this-person-does-not-exist.com/en>
+4. <https://uiuxtrend.com/sus-calculator/>
