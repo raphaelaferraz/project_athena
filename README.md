@@ -33,7 +33,7 @@
 </a>
 
 ## 🧑‍🏫 Professores:
-### Orientador 
+### Orientador(a) 
 - <a href="https://www.linkedin.com/in/profclaudioandre/">Cláudio Fernando André</a>
 ### Instrutores
 - <a href="https://www.linkedin.com/in/fatima-toledo/">Fátima Toledo</a>
@@ -48,18 +48,24 @@ O problema apresentado pelo Banco PAN consiste na atual plataforma de pesquisa (
 
 ## 📝 LINK
 
-Clique <a href="https://www.linkedin.com/in/victorbarq/">AQUI</a> para ver o projeto funcionando. 
+Clique <a href="https://kp6pnx-1234.csb.app/">AQUI</a> para ver o projeto funcionando. (O link é temporário, já que está no CodeSandBox)
 
 ## 📁 Estrutura de pastas
 
 |--> documentos<br>
   &emsp;| --> outros <br>
-  &emsp;| T9_G3_V03_Web_application_document.pdf<br>
-  &emsp;| T9_G3_V03_Web_application_document.docx<br>
+  &emsp;| T9_G3_V3.1_Web_application_document.pdf<br>
+  &emsp;| T9_G3_V3.1_Web_application_document.docx<br>
 |--> imagens<br>
 |--> src<br>
-  &emsp;|--> Backend<br>
-  &emsp;|--> Frontend<br>
+  &emsp;|--> backend<br>
+    &emsp; &emsp;| --> data <br>
+  &emsp;|--> frontend<br>
+  &emsp; &emsp;| --> assets <br>
+  &emsp; &emsp; &emsp;| --> css <br>
+  &emsp; &emsp; &emsp;| --> img <br>
+  &emsp; &emsp; &emsp;| --> js <br>
+  &emsp; &emsp;| --> html <br>
 | readme.md<br>
 | license.txt
 
@@ -120,6 +126,7 @@ npm start
 
 Aqui estão as referências usadas no projeto:
 
+1. <https://creativecommons.org/share-your-work/>
 1. <https://pt.wikipedia.org/w/index.php?title=Banco_PAN&oldid=65720861>
 2. <https://conteudos.xpi.com.br/renda-fixa/relatorios/banco-pan/>
 3. <https://this-person-does-not-exist.com/en>

@@ -82,8 +82,13 @@
             <template data-template>
             <li class="secao-tabelas__lista__item">
             <input type="hidden" readonly value="" data-id-tabela-favoritada/>
+            <input type="hidden" readonly value="" data-id-bd-favoritada/>
             <div class="secao-tabelas__lista__item__div-titulo">
               <h2 class="secao-tabelas__lista__item__div-titulo__titulo" data-nome></h2>
+              <div id="div-verificacao" data-icone-verificacao>
+                <input type="hidden" class="secao-tabelas_lista_item_div-informacoes_div-icones__input-verificacao" value="" data-verificacao>
+                <img src="../assets/img/verificacao.svg">
+              </div>
             </div>
             <div class="secao-tabelas__lista__item__div-informacoes-favoritos">
               <div class="secao-tabelas__lista__item__div-informacoes__div-detalhes">
@@ -108,9 +113,10 @@
                 </div>
               </div>
             </div>
-            <div class="secao-tabelas__lista__item__paragrafo-div">
+            <div class="secao-tabelas__lista__item__div-paragrafo">
               <p class="secao-tabelas__lista__item__paragrafo" data-descricao></p>
               <input type="hidden" readonly id="id_tabela" value="" data-id-tabela/>
+              <input type="hidden" readonly id="id_bd" value="" data-id-bd>
             </div>
             </li>
             </template>

@@ -29,10 +29,10 @@ const DBPATH = "./backend/data/db_projeto.db";
 app.set("view engine", "ejs");
 
 // Define o diretório 'views' como o diretório raiz das páginas HTML​
-app.set("views", "./Frontend/");
+app.set("views", "./frontend/");
 
 // Define o diretório 'frontend' como o diretório raiz do servidor web
-app.use(express.static("./Frontend/"));
+app.use(express.static("./frontend/"));
 
 // Define o express para receber dados em formato JSON
 app.use(express.json());
@@ -49,7 +49,7 @@ const db = new sqlite3.Database(DBPATH, sqlite3.OPEN_READWRITE, (err) => {
 
 
 /********************* ENDPOINTS DO INDEX ********************/
-// Endpoint de home page ligado com o index.html
+// Endpoint que renderiza a página principal (index.html)
 app.get("/", (req, res) => {
   // Renderiza o arquivo EJS 
   res.render("html/index");
@@ -183,7 +183,7 @@ app.post("/atualizar", urlencodedParser, (req, res) => {
 
 
 /*********** ENDPOINTS DE CAMPOS ***********/
-// Endpoint que lista todos os campos que estao em uma tabela
+// Endpoint que lista todos os campos que pertencem a uma tabela
 app.get("/campos", (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
@@ -206,14 +206,14 @@ app.get("/campos", (req, res) => {
 
 
 /*********** ENDPOINTS DE FAVORITOS ***********/
-// Endpoint que lista todos os favoritos
+// Endpoint que lista todas as tabelas favoritadas
 app.get("/favoritos", (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
   // Define o cabeçalho da resposta
   res.setHeader("Access-Control-Allow-Origin", "*");
   // Define o código SQL que será executado
-  const sql = `SELECT favorito.id_tabela, tabela.id, tabela.nome, tabela.descricao, tabela.categoria, tabela.database, tabela.dado_sensivel
+  const sql = `SELECT favorito.id_tabela, tabela.id, tabela.id_bd, tabela.nome, tabela.descricao, tabela.categoria, tabela.database, tabela.dado_sensivel
   FROM tabela
   INNER JOIN favorito ON tabela.id = favorito.id_tabela`;
   // Executa o comando SQL
@@ -248,7 +248,7 @@ app.get("/favoritos/ids", (req, res) => {
   });
 });
 
-// Endpoint join para tabela e favorito
+// Endpoint que realiza o join entre "tabela" e "favorito" para que seja possível renderizar no front-end as tabelas favoritadas
 app.get("/tabelasFavoritadas", (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
@@ -271,7 +271,7 @@ app.get("/tabelasFavoritadas", (req, res) => {
   });
 });
 
-// Endpoint para inserir tabela aos favoritos
+// Endpoint para inserir uma determinada tabela aos favoritos
 app.get("/favoritos/inserirTabela", urlencodedParser, (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
@@ -292,7 +292,7 @@ app.get("/favoritos/inserirTabela", urlencodedParser, (req, res) => {
   res.redirect("/tabelasFavoritadas");
 });
 
-// Endpoint para deletar tabela dos favoritos
+// Endpoint para deletar uma determinada tabela dos favoritos
 app.get("/favoritos/delete", urlencodedParser, (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
@@ -312,7 +312,7 @@ app.get("/favoritos/delete", urlencodedParser, (req, res) => {
 
 
 /*********** ENDPOINTS DE FEEDBACK ***********/
-// Endpoint para inserir um feedback
+// Endpoint para inserir um feedback de uma determinda tabela
 app.post("/inserirfeedback", urlencodedParser, (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
@@ -333,7 +333,7 @@ app.post("/inserirfeedback", urlencodedParser, (req, res) => {
   res.end();
 });
 
-// Endpoint para buscar os feedbacks
+// Endpoint para buscar os feedbacks de uma determinada tabela
 app.get("/feedbacks", (req, res) => {
   // Define o status da resposta
   res.statusCode = 200;
@@ -353,6 +353,7 @@ app.get("/feedbacks", (req, res) => {
     }
   });
 });
+
 
 // Inicia o servidor
 app.listen(port, hostname, () => {

@@ -35,6 +35,7 @@ $(document).ready(function () {
     var idTabela = $(this).find('[data-id-tabela]').val();
     var idBd = $(this).find('[data-id-bd]').val();
     var url = 'informacoesTabela?id=' + idTabela + "&id_bd=" + idBd;
+
     // Redireciona para a URL com base no ID da tabela
     window.location.href = url;
   });
@@ -182,6 +183,5 @@ $(document).ready(function () {
       });
     });
   });
-
 });
 

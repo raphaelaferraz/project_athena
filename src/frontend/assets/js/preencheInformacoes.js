@@ -30,7 +30,7 @@ fetch(url)
     // Obtém a tabela a partir dos dados retornados
     let tabela = data[0];
 
-    // Armazena o elemento do DOM que será preenchido com o ícone de dado sensível
+    // Armazena os elementos do DOM que serão preenchidos com as informações da tabela
     const divDado = document.querySelector('[data-icone-sensivel]');
     const dadoSensivel = document.querySelector('[data-sensivel]');
 
@@ -59,6 +59,7 @@ fetch(url)
       divDado.style.display = 'none';
     }
   })
+  // Caso ocorra algum erro, exibe o erro no console
   .catch(error => {
     console.log(error);
   });
@@ -68,5 +69,6 @@ function guarda(valor) {
   // Armazena o valor da estrela clicada no campo "estrela"
   document.getElementById('estrela').value = valor;
 }
+
 // Armazena o valor do id da tabela no campo "id_tabela"
 document.getElementById('id_tabela').value = idTabela;

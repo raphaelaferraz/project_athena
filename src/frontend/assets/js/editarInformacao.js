@@ -1,4 +1,4 @@
-// Função para editar as informações de uma tabela
+// Função que é responsável por editar as informações de uma tabela
 function editar(){
   // Obtém os parâmetros da URL atual
   var urlParams = new URLSearchParams(window.location.search);
@@ -19,14 +19,15 @@ function editar(){
   const caminhoTabela = document.querySelector("#caminho-tabela");
   const defasagem = document.querySelector("#defasagem");
   const engenheiroIngestao = document.querySelector("#engenheiro-ingestao");
+  const sql_code = document.querySelector("#sql_code");
   
   // Realiza uma requisição fetch para obter os dados da tabela
   fetch(url)
     .then(response => response.json())
     .then(data => {
-      // Obtém a tabela a partir dos dados retornados
+      // Armaena a tabela a partir dos dados retornados
       let tabela = data[0];
-      
+     
       // Preenche os elementos do DOM com as informações da tabela
       titulo.value = tabela.nome;
       descricao.value = tabela.descricao;
@@ -38,14 +39,15 @@ function editar(){
       defasagem.value = tabela.defasagem;
       engenheiroIngestao.value = tabela.eng_ingestao;
     })
+    // Caso ocorra algum erro, exibe o erro no console
     .catch(error => {
       console.log(error);
     });
   };
   
-  // Função para enviar a solicitação de atualização dos metadados
+  // Função que é responsável por enviar a solicitação de edição da tabela
   function enviarSolicitacao() {
-    // Armazena os elementos do DOM que serão utilizados
+    // Armazena os elementos do DOM que serão preenchidos com as informações da tabela
     const titulo = document.querySelector("#titulo");
     const descricao = document.querySelector("#descricao");
     const conjuntoDados = document.querySelector("#conjunto-dados");

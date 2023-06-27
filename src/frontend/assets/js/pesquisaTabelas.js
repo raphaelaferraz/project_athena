@@ -20,17 +20,17 @@ let fuse;
 let cartoesMaximos = 5;
 
 // Armazena os filtros selecionados pelo usuário
-var filtros = [];
+var filtros = []
 
 // Armazena o id das tabelas favoritadas
 var listaFavoritos = [];
 
-// Inicia o modo escuro ao carregar a página
+// Assim que a página carregar será verificado se o input de pesquisa está vazio
 $(document).ready(() => { 
   // Armazena o estado da div que exibe os filtros (aberto ou fechado)
   var toggle = true;
 
-  // Inicia o modo escuro ao clicar no botão
+  // Quando o botão de filtro for clicado
   $(document).on('click', '#btn-filtro', () => {
     // Ao clicar, caso esteja fechado ele abre
     if (toggle){
@@ -40,21 +40,23 @@ $(document).ready(() => {
       $( ".secao-pesquisa__div-filtro" ).css( "display", "inline-grid");
       $( ".secao-pesquisa__div-filtro" ).css( "height", "150px");
 
+      // Altera o estado da div
       toggle = !toggle;
-    // caso esteja aberto ele fecha
+
+    // Caso esteja aberto ele fecha
     } else {
       $("#btn-filtro").addClass("btn-filtro ");
       $("#btn-filtro").removeClass("btn-filtro-ativado ");
-      $( ".secao-pesquisa__div-filtro" ).slideUp( 300 );
+      $(".secao-pesquisa__div-filtro" ).slideUp( 300 );
       
+      // Altera o estado da div
       toggle = !toggle;
     }
   });
 
   // Ao selecionar um filtro
   $(document).on('click', '.filtro-button', (event) => {
-
-    // caso o array filtros não incluir o filtro selecionado
+    // Caso o array filtros não incluir o filtro selecionado
     if(!filtros.includes(event.target.textContent)) {
       // Adiciona a categoria ao array filtros
       filtros.push(event.target.textContent);
@@ -65,7 +67,7 @@ $(document).ready(() => {
 
       // Realiza a pesquisa novamente
       pesquisaDifusa($('#input-pesquisa').val(), 1);
-    } else {
+    } else{
       // Remove a categoria ao array filtros
       filtros.splice (filtros.indexOf(event.target.textContent), 1);
 
@@ -76,9 +78,9 @@ $(document).ready(() => {
       } else {
         $(`#${event.target.id}`).css('color', '#4DA9FF');
       }
-      
+
       // Realiza a pesquisa novamente
-      pesquisaDifusa($('#input-pesquisa').val(), 1)
+      pesquisaDifusa($('#input-pesquisa').val(), 1);
     }
   })
 })
@@ -114,6 +116,7 @@ function pesquisaDifusa(valor, pagina) {
 
   // Executa o "fuzzy search" e filtra de acordo com o array filtros
   const resultados = fuse.search(valor).filter(resultado => {
+    // Verifica se o array filtros inclui a categoria do item
     if (filtros.includes(resultado.item.categoria) || filtros[0] === undefined){
       return true;
     }
@@ -122,7 +125,6 @@ function pesquisaDifusa(valor, pagina) {
   // Ordena os itens pelos resultados
   const resultadosOrdenados = resultados.map(({ item, score }) => ({ item, score }))
   .sort((a, b) => {
-
     // Verifica se "verificacao_governanca" contém "S"
     const aTemS = a.item.verificacao_governanca.includes("S");
     const bTemS = b.item.verificacao_governanca.includes("S");
@@ -142,14 +144,19 @@ function pesquisaDifusa(valor, pagina) {
 
   // Armazena os elementos visíveis e o número de cartões mostrados
   const visibilidadeItem = new Set();
+
+  // Armazena o número de cartões mostrados
   let cartoesMostrados = 0;
 
   // Verifica se o número de resultados é menor ou igual ao cartoesMaximos
   if (resultadosOrdenados.length <= cartoesMaximos) {
+    // Lista todos os resultados
     resultadosOrdenados.forEach(({ item }) => {
+      // Verifica se o item existe
       if (!item) {
         return;
       }
+
       // Remove a classe "hide" do elemento
       item.element.classList.remove("hide");
 
@@ -202,7 +209,9 @@ function pesquisaDifusa(valor, pagina) {
 
 // Adiciona um "EventListener" colocando um click a cada item do link, que são os botões da paginação
 paginationLinks.forEach((link) => {
+  // Quando o botão for clicado, a função será executada
   link.addEventListener("click", (e) => {
+    // Previne o comportamento padrão do link
     e.preventDefault();
     // Obtém o número da página
     const pagina = parseInt(link.textContent);
@@ -309,11 +318,11 @@ fetch("/favoritos/ids")
 
     // Exibe todos os resultados em uma única página se a quantidade for menor ou igual ao cartoesMaximos
     if (tabelas.length <= cartoesMaximos) {
-      // Executa a pesquisa difusa
       pesquisaDifusa("", 1);
     }
   })
   .catch((error) => {
+    
     // Tratamento de erros para qualquer um dos fetches
     console.error(error);
   });
