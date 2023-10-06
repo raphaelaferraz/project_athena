@@ -49,6 +49,7 @@ O problema apresentado pelo Banco PAN consiste na atual plataforma de pesquisa (
 ## 📝 LINK
 
 Clique <a href="https://kp6pnx-1234.csb.app/">AQUI</a> para ver o projeto funcionando. (O link é temporário, já que está no CodeSandBox)
+Clique <a href="https://github.com/2023M2T9-Inteli">AQUI</a> para acessar o repositório oficial do Inteli.
 
 ## 📁 Estrutura de pastas
 
